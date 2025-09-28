@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">GymFinder</string>
+    <string name="welcome">Welcome!</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="button_save">SAVE</string>
+    <string name="button_create">CREATE</string>
+    <string name="button_add">ADD</string>
+    <string name="cd_back_arrow">Back</string>
+
+
+    <string name="sign_in_title">Sign In</string>
+    <string name="create_account_title">Create Account</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_username">Username</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="button_sign_in">SIGN IN</string>
+    <string name="register_new_user_link">Register for New User</string>
+    <string name="already_have_account_link">Already have an account?</string>
+    <string name="label_gender">Gender</string>
+    <string name="radio_button_male">Male</string>
+    <string name="radio_button_female">Female</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="cd_toggle_password_visibility">Toggle password visibility</string>
+    <string name="cd_toggle_confirm_password_visibility">Toggle confirm password visibility</string>
+
+
+    <string name="home_tagline">Help us help you find the perfect gym!!</string>
+    <string name="button_go"><![CDATA[>>>>GO>>>>]]></string>
+
+
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_surname">Surname</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_street_number">Street Number</string>
+    <string name="hint_street_name">Street Name</string>
+    <string name="btn_editprofile">EDIT PROFILE</string>
+    <string name="btn_deleteprofile">DELETE PROFILE</string>
+    <string name="btn_profilenotification">PROFILE NOTIFICATIONS</string>
+    <string name="btn_profilechangepassword">CHANGE PASSWORD</string>
+    <string name="btn_profile_sign_out">SIGN OUT</string>
+
+
+    <string name="gym_list_title">Gym List</string>
+    <string name="hint_gym_description">Gym Description</string>
+    <string name="hint_price">Price</string>
+    <string name="hint_operational_hours">Operational Hours</string>
+    <string name="button_accept">ACCEPT</string>
+    <string name="button_reject">REJECT</string>
+
+
+    <string name="question_list_title">Question List</string>
+    <string name="add_question_title">Add Question</string>
+    <string name="edit_question_title">Edit Question</string>
+    <string name="questionnaire_title">Questionnaire</string>
+    <string name="questionnaire_page_title">Questionaire</string>
+    <string name="hint_enter_question">Enter Question</string>
+    <string name="hint_question">Question</string>
+    <string name="hint_enter_budget">Enter your monthly budget</string>
+    <string name="radio_button_no">No</string>
+    <string name="radio_button_yes">Yes</string>
+    <string name="button_add_question">Add Question</string>
+    <string name="button_edit_question">Edit Question</string>
+    <string name="button_delete_question">Delete Question</string>
+
+
+    <string-array name="user_types">
+        <item>Select User Type</item>
+        <item>User</item>
+        <item>Gym Admin</item>
+        <item>Admin</item>
+    </string-array>
+
+</resources>
