@@ -76,5 +76,16 @@
         <item>Gym Admin</item>
         <item>Admin</item>
     </string-array>
+    <!-- GymAdminHomePage -->
+    <string name="app_title">Gym Finder</string>
+    <string name="btn_edit_gym"> Edit gym</string>
+    <string name="btn_sign_out"> SIGN OUT</string>
+    <!--ViewProfileOptions -->
+    <string name="gym_user">Gym User</string>
+    <!--userHomePage -->
+    <string name="questions">Answer questions</string>
+    <string name="notifications">Notifications</string>
+    <string name="gym_list">View GymList</string>
+    <string name="menu">Menu</string>
 
 </resources>

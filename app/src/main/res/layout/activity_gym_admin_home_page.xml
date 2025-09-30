@@ -2,9 +2,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.GymAdminHomePage">
+    android:background="@drawable/back1"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/menu"
+        android:padding="8dp"
+        android:src="@drawable/outline_density_medium_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/title_gym_finder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/app_title"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="@color/grey"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/options_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_gym_finder">
+
+        <include
+            android:id="@+id/option_add_gym"
+            layout="@layout/list_item_option" />
+
+        <include
+            android:id="@+id/option_edit_gym"
+            layout="@layout/list_item_option" />
+
+        <include
+            android:id="@+id/option_delete_gym"
+            layout="@layout/list_item_option" />
+
+        <include
+            android:id="@+id/option_notification"
+            layout="@layout/list_item_option" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

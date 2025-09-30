@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
         <activity
+            android:name=".Activity.QuestionnaireActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SystemAdminHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UserHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UserProfileOptions"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.GymAdminHomePage"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DIYActivity"
             android:exported="false" />
         <activity

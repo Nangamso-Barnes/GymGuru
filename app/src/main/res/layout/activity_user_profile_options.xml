@@ -5,6 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back1"
+    android:padding="16dp"
     tools:context=".Activity.UserProfileOptions">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/view_profile_picture"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/viewprofileoptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+    <TextView
+        android:id="@+id/txtUserProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_profile_picture"
+        tools:text="User Name" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/gym_user"
+        android:textColor="#888"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUserProfile" />
+
+    <LinearLayout
+        android:id="@+id/profile_options_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView">
+
+        <include
+            android:id="@+id/option_edit_profile"
+            layout="@layout/list_item_option" />
+
+        <include
+            android:id="@+id/option_delete_profile"
+            layout="@layout/list_item_option" />
+
+        <include
+            android:id="@+id/option_change_password"
+            layout="@layout/list_item_option" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sign_out"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="gymAdminSignOut"
+        android:padding="12dp"
+        android:text="@string/btn_sign_out"
+        app:backgroundTint="@color/grey"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/outline_logout_24"
+        app:iconGravity="textStart"
+        app:iconPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
