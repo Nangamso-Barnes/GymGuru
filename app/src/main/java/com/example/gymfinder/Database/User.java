@@ -1,9 +1,16 @@
+
 package com.example.gymfinder.Database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User")
+@Entity(tableName = "User",
+        foreignKeys = @ForeignKey(entity = Gym.class,
+                parentColumns = "gymCode",
+                childColumns = "gymCode",
+                onDelete = ForeignKey.SET_NULL)) // Or CASCADE, depending on desired behavior
 public class User {
     @PrimaryKey(autoGenerate = true)
     public int userID;
@@ -18,5 +25,6 @@ public class User {
     public String streetName;
     public String streetNumber;
 
+    @ColumnInfo(index = true)
+    public Integer gymCode;
 }
-

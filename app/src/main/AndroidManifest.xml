@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
         <activity
+            android:name=".Activity.AcceptOrRejectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.GymListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.DIYActivity"
             android:exported="false" />
         <activity
