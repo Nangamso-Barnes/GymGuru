@@ -1,8 +1,6 @@
-
 package com.example.gymfinder.Activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,10 +21,12 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
     private EditText gymStreetName;
     private EditText gymDes;
     private EditText gymPrice;
-    private EditText gymHrs;
+    // UPDATED: Replace single hours field with two
+    private EditText gymStartTime;
+    private EditText gymEndTime;
     private Button btnAccept;
     private Button btnReject;
-    private AppDatabase db; // Use Room database
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +46,14 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
         gymStreetNumber = findViewById(R.id.gymStreetNumber);
         gymDes = findViewById(R.id.gymDes);
         gymPrice = findViewById(R.id.gymPrice);
-        gymHrs = findViewById(R.id.gymHrs);
+        // UPDATED: Initialize start and end time EditTexts
+        // Make sure these IDs match your updated XML layout
+        gymStartTime = findViewById(R.id.gymStartTime);
+        gymEndTime = findViewById(R.id.gymEndTime);
         btnAccept = findViewById(R.id.btnAccept);
         btnReject = findViewById(R.id.btnReject);
 
-
         db = AppDatabase.getDatabase(this);
-
 
         int gymCode = getIntent().getIntExtra("gymCode", -1);
         if (gymCode != -1) {
@@ -60,15 +61,16 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
         }
 
         btnAccept.setOnClickListener(v -> {
+            // This logic can be expanded to update the gym's status to "accepted"
             Toast.makeText(this, "Gym accepted!", Toast.LENGTH_SHORT).show();
-
             finish();
         });
 
         btnReject.setOnClickListener(v -> {
             if (gymCode != -1) {
-
                 AppDatabase.databaseWriteExecutor.execute(() -> {
+                    // Assuming you have a method to delete by primary key (gymCode)
+                    // If not, you'd fetch the Gym object first, then delete it.
                     int deletedRows = db.gymDao().deleteGym(gymCode);
 
                     runOnUiThread(() -> {
@@ -85,10 +87,8 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
     }
 
     private void loadGymData(int gymCode) {
-    
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Gym gym = db.gymDao().getGymByCode(gymCode);
-
 
             if (gym != null) {
                 runOnUiThread(() -> {
@@ -97,7 +97,8 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
                     gymStreetNumber.setText(String.valueOf(gym.gymStreetNumber));
                     gymDes.setText(gym.gymDescription);
                     gymPrice.setText(String.valueOf(gym.price));
-                    gymHrs.setText(gym.operationalHours);
+                    gymStartTime.setText(gym.startTime);
+                    gymEndTime.setText(gym.endTime);
                 });
             }
         });

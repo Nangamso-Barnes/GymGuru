@@ -1,4 +1,5 @@
 package com.example.gymfinder.Database;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,5 +9,7 @@ public class Question {
     public int queID;
 
     public String question;
+    @ColumnInfo(name = "question_tag")
+    public String questionTag;
 }
 

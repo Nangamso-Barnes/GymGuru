@@ -11,133 +11,133 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/back1"
-        tools:context=".Activity.AcceptOrRejectActivity">
+        tools:context=".Activity.EditProfileActivity">
 
         <TextView
             android:id="@+id/gymName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:text="@string/edit_profile_title"
             android:textColor="@color/white"
             android:textSize="34sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.015" />
 
         <EditText
-            android:id="@+id/gymSreetName"
+            android:id="@+id/editFirstName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="@string/hint_street_name"
+            android:hint="@string/hint_name"
             android:inputType="text"
             android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gymName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gymName" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
-            android:id="@+id/gymStreetNumber"
+            android:id="@+id/editLastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:hint="@string/hint_surname"
+            android:inputType="text"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/editFirstName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editLastName" />
+
+        <EditText
+            android:id="@+id/editPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/white"
+            android:hint="@string/hint_phone_number"
+            android:inputType="phone"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+
+        <EditText
+            android:id="@+id/editStreetNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
             android:hint="@string/hint_street_number"
             android:inputType="number"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gymSreetName" />
+            app:layout_constraintTop_toBottomOf="@id/editPhoneNumber" />
 
         <EditText
-            android:id="@+id/gymDes"
+            android:id="@+id/editStreetName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
-            android:hint="@string/hint_gym_description"
+            android:hint="@string/hint_street_name"
             android:inputType="text"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gymStreetNumber" />
-
-        <EditText
-            android:id="@+id/gymPrice"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:hint="@string/hint_price"
-            android:inputType="numberDecimal"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gymDes" />
-
-        <EditText
-            android:id="@+id/gymStartTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:hint="Start Time (e.g., 6:00 AM)"
-            android:inputType="text"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gymPrice" />
-
-        <EditText
-            android:id="@+id/gymEndTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:hint="End Time (e.g., 10:00 PM)"
-            android:inputType="text"
-            android:padding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gymStartTime" />
+            app:layout_constraintTop_toBottomOf="@id/editStreetNumber" />
 
         <Button
-            android:id="@+id/btnReject"
+            android:id="@+id/btnEditSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:onClick="onClickedReject"
-            android:text="@string/button_reject"
-            app:layout_constraintEnd_toEndOf="@+id/gymEndTime"
-            app:layout_constraintStart_toEndOf="@+id/btnAccept"
-            app:layout_constraintTop_toBottomOf="@+id/gymEndTime" />
-
-        <Button
-            android:id="@+id/btnAccept"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:onClick="onClickedAccept"
-            android:text="@string/button_accept"
-            app:layout_constraintEnd_toStartOf="@+id/btnReject"
-            app:layout_constraintStart_toStartOf="@+id/gymEndTime"
-            app:layout_constraintTop_toBottomOf="@+id/gymEndTime" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="onClickedSave"
+            android:text="@string/button_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editStreetName"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

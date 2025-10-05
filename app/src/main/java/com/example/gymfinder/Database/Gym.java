@@ -14,7 +14,9 @@ public class Gym {
     public int gymStreetNumber;
     public String gymDescription;
     public int price;
-    public String operationalHours;
+    public String startTime;
+    public String endTime;
+
     public Gym() { } // Empty constructor for Room
 
     public Gym(String gymName, String gymStreetName, int gymStreetNumber, String gymDescription, int price, String operationalHours) {
@@ -23,6 +25,7 @@ public class Gym {
         this.gymStreetNumber = gymStreetNumber;
         this.gymDescription = gymDescription;
         this.price = price;
-        this.operationalHours = operationalHours;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }

@@ -68,40 +68,39 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     public void onClickedSignIn(View view) {
-        String username = LoginUserName.getText().toString();
-        String password = editLoginPassword.getText().toString();
-        
-        if(username.length() == 0 || password.length() == 0){
-            Toast.makeText(getApplicationContext(),"Please fill all details",Toast.LENGTH_SHORT).show();
+        String username = LoginUserName.getText().toString().trim();
+        String password = editLoginPassword.getText().toString().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
             return;
         }
-        
-        try {
-            AppDatabase db=AppDatabase.getInstance(this);
-            if (db == null) {
-                Toast.makeText(getApplicationContext(),"Database error. Please try again.",Toast.LENGTH_SHORT).show();
-                return;
-            }
-            
-            Integer userID=db.userDao().login(username,password);
-            if (userID != null) {
-                Toast.makeText(getApplicationContext(),"Login Success",Toast.LENGTH_SHORT).show();
-                // we need to save the login information in a local place so we use sharedPrefence
-                SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt("userID", userID);
-                editor.apply();
 
-                // Navigate to HomeActivity
-                Intent intent = new Intent(LoginActivity.this, DIYActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(getApplicationContext(),"Invalid name and password",Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(),"Login error. Please try again.",Toast.LENGTH_SHORT).show();
-        }
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            AppDatabase db = AppDatabase.getDatabase(this);
+            Integer userID = db.userDao().login(username, password);
+
+
+            runOnUiThread(() -> {
+                if (userID != null) {
+                    Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+
+
+                    SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("userID", userID);
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.apply();
+
+
+                    Intent intent = new Intent(LoginActivity.this, DIYActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
     }
 
     public void onClickedNewUser(View view) {

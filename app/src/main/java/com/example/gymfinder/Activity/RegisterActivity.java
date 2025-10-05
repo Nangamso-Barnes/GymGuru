@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
 final String finalGender = regGender;
 executor.execute(() ->{
 
-    AppDatabase db = AppDatabase.getInstance(this);
+    AppDatabase db = AppDatabase.getDatabase(this);
     User user=new User();
     user.UserName=username;
     user.FirstName=regName;

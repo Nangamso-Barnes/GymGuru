@@ -22,6 +22,6 @@ public interface GymDao {
     @Query("DELETE FROM Gym WHERE gymCode = :gymCode")
     int deleteGym(int gymCode);
 
-    @Query("SELECT operationalHours FROM Gym")
-    List<String> getAllOperationalHours();
+    @Query("SELECT DISTINCT startTime || ' - ' || endTime FROM Gym")
+    List<String> getDistinctTimeSlots();
 }

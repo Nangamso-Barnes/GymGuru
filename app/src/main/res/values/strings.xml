@@ -68,7 +68,9 @@
     <string name="button_add_question">Add Question</string>
     <string name="button_edit_question">Edit Question</string>
     <string name="button_delete_question">Delete Question</string>
-
+    <string name="delete_question">Delete Question</string>
+    <string name="edit_question">Edit Question</string>
+    <string name="back_button">Back Button</string>
 
     <string-array name="user_types">
         <item>Select User Type</item>
