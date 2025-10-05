@@ -8,37 +8,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// Make sure to import your R file
+
 import com.example.gymfinder.R;
 
-public class SystemAdminHomePage extends AppCompatActivity {
+public class QuestionnaireActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_admin_home_page);
+        setContentView(R.layout.activity_questionnaire);
 
-        setupOption(R.id.option_create_list, R.drawable.outline_list_24, "Create List", new View.OnClickListener() {
+        setupOption(R.id.option_add_question, R.drawable.outline_add_circle_24, "Add Question", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Example: Intent to go to a CreateListActivity
-                Toast.makeText(SystemAdminHomePage.this, "Create List Clicked!", Toast.LENGTH_SHORT).show();
+                // Example: Intent to go to an AddQuestionActivity
+                Toast.makeText(QuestionnaireActivity.this, "Add Question Clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        setupOption(R.id.option_questionnaire, R.drawable.outline_quiz_24, "Questionnaire", new View.OnClickListener() {
+        setupOption(R.id.option_edit_question, R.drawable.outline_edit_24, "Edit Question", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Example: Intent to go to a QuestionnaireActivity
-                Toast.makeText(SystemAdminHomePage.this, "Questionnaire Clicked!", Toast.LENGTH_SHORT).show();
+                // Example: Intent to go to an EditQuestionActivity
+                Toast.makeText(QuestionnaireActivity.this, "Edit Question Clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        setupOption(R.id.option_approve_gym, R.drawable.outline_check_circle_24, "Approve Gym", new View.OnClickListener() {
+        setupOption(R.id.option_delete_question, R.drawable.outline_delete_24, "Delete Question", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Example: Intent to go to an ApproveGymActivity
-                Toast.makeText(SystemAdminHomePage.this, "Approve Gym Clicked!", Toast.LENGTH_SHORT).show();
+                // Example: Intent to go to a DeleteQuestionActivity
+                Toast.makeText(QuestionnaireActivity.this, "Delete Question Clicked!", Toast.LENGTH_SHORT).show();
             }
         });
     }

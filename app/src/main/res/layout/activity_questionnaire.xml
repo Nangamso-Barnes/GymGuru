@@ -6,56 +6,42 @@
     android:layout_height="match_parent"
     android:background="@drawable/back1"
     android:padding="16dp"
-    tools:context=".Activity.SystemAdminHomePage">
-
-
-    <ImageButton
-        android:id="@+id/menuButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/menu"
-        android:padding="8dp"
-        android:src="@drawable/outline_density_medium_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
+    tools:context=".Activity.QuestionnaireActivity">
 
     <TextView
-        android:id="@+id/system_home_page"
+        android:id="@+id/title_questionnaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/app_title"
+        android:text="Questionnaire"
+        android:textStyle="bold"
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:textColor="@color/grey"
         android:textSize="34sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/home_options_container"
+        android:id="@+id/questionnaire_options_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/system_home_page">
+        app:layout_constraintTop_toBottomOf="@id/title_questionnaire">
 
         <include
-            android:id="@+id/option_create_list"
+            android:id="@+id/option_add_question"
             layout="@layout/list_item_option" />
 
         <include
-            android:id="@+id/option_questionnaire"
+            android:id="@+id/option_edit_question"
             layout="@layout/list_item_option" />
 
         <include
-            android:id="@+id/option_approve_gym"
+            android:id="@+id/option_delete_question"
             layout="@layout/list_item_option" />
 
     </LinearLayout>

@@ -11,6 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
+
+        <!-- Your activities -->
+        <activity
+            android:name=".Activity.QuestionnaireActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SystemAdminHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UserHomePage"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UserProfileOptions"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.GymAdminHomePage"
+            android:exported="false" />
+
+        <!-- Partner’s activities -->
         <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false" />
@@ -41,6 +60,8 @@
         <activity
             android:name=".Activity.GymListActivity"
             android:exported="false" />
+
+        <!-- Shared activities -->
         <activity
             android:name=".Activity.DIYActivity"
             android:exported="false" />
@@ -52,7 +73,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
