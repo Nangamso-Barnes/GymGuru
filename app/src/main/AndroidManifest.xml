@@ -37,6 +37,30 @@
             android:name=".Activity.GymAdminHomePage"
             android:exported="false" />
         <activity
+            android:name=".Activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ViewProfileDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeleteQuestionListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditQuestionListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.QuestionaireActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditQuestionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddQuestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.AcceptOrRejectActivity"
             android:exported="false" />
         <activity
@@ -50,7 +74,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.CompleteQuestionaireActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

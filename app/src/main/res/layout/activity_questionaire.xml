@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back1"
+    tools:context=".Activity.QuestionaireActivity">
+
+    <TextView
+        android:id="@+id/viewSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/questionnaire_page_title"
+        android:textColor="@color/grey"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <Button
+        android:id="@+id/btnEditQuestion"
+        android:layout_width="343dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickedEditQ"
+        android:text="@string/button_edit_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddQuestion" />
+
+    <Button
+        android:id="@+id/btnDeleteQuestion"
+        android:layout_width="340dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickedDeleteQ"
+        android:text="@string/button_delete_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditQuestion" />
+
+    <Button
+        android:id="@+id/btnAddQuestion"
+        android:layout_width="334dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="56dp"
+        android:onClick="onClickedAddQ"
+        android:text="@string/button_add_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewSurname" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,4 +21,10 @@ public interface GymDao {
 
     @Query("DELETE FROM Gym WHERE gymCode = :gymCode")
     int deleteGym(int gymCode);
+<<<<<<< HEAD
+=======
+
+    @Query("SELECT DISTINCT startTime || ' - ' || endTime FROM Gym")
+    List<String> getDistinctTimeSlots();
+>>>>>>> da337631b2a496b88d3d07b69ad18d459239b937
 }

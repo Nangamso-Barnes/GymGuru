@@ -14,11 +14,17 @@ public class Gym {
     public String gymStreetName;
     public int gymStreetNumber;
     public String gymDescription;
+<<<<<<< HEAD
     public double price;
     public String openingTime;//changed for clarity
     public String closingTime;
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] gymPicture; // Added the picture field as a byte array
+=======
+    public int price;
+    public String startTime;
+    public String endTime;
+>>>>>>> da337631b2a496b88d3d07b69ad18d459239b937
 
     public Gym() { } // Empty constructor for Room
 
@@ -28,8 +34,13 @@ public class Gym {
         this.gymStreetName = gymStreetName;
         this.gymDescription = gymDescription;
         this.price = price;
+<<<<<<< HEAD
         this.gymPicture=gymPicture;
         this.openingTime=openingTime;
         this.closingTime=closingTime;
+=======
+        this.startTime = startTime;
+        this.endTime = endTime;
+>>>>>>> da337631b2a496b88d3d07b69ad18d459239b937
     }
 }
