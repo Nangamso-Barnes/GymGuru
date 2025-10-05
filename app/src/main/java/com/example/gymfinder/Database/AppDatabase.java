@@ -19,7 +19,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Gym.class, User.class, UserResponse.class, Question.class,
-        GymClassType.class, TrainerType.class, Equipment.class},
+        GymClassType.class, TrainerType.class, Equipment.class,
+         GymEquipmentCrossRef.class,GymClassCrossRef.class,GymTrainerCrossRef.class},
         version = 1,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
@@ -59,44 +60,70 @@ public abstract class AppDatabase extends RoomDatabase {
                 GymDao gymDao = INSTANCE.gymDao();
                 MiscDao miscDao = INSTANCE.miscDao();
 
-                // 1. Populate TrainerType Table (10 records)
-                miscDao.insertTrainerType(
-                        new TrainerType("Cardio Specialist"), new TrainerType("Strength Coach"),
-                        new TrainerType("Yoga Instructor"), new TrainerType("Pilates Instructor"),
-                        new TrainerType("CrossFit L1 Trainer"), new TrainerType("Nutritionist"),
-                        new TrainerType("Boxing Coach"), new TrainerType("HIIT Specialist"),
-                        new TrainerType("Senior Fitness Coach"), new TrainerType("Sports Physiotherapist")
-                );
 
-                // 2. Populate GymClassType Table (10 records)
-                miscDao.insertGymClassType(
-                        new GymClassType("Spin Class"), new GymClassType("Zumba"),
-                        new GymClassType("Yoga"), new GymClassType("Pilates Reformer"),
-                        new GymClassType("CrossFit WOD"), new GymClassType("HIIT Circuit"),
-                        new GymClassType("Boxing Fundamentals"), new GymClassType("Aqua Aerobics"),
-                        new GymClassType("BodyPump"), new GymClassType("Seniors Mobility")
-                );
+                // 1. Populate TrainerType Table and get IDs
+                long tt1 = miscDao.insertTrainerType(new TrainerType("Cardio Specialist"));
+                long tt2 = miscDao.insertTrainerType(new TrainerType("Strength Coach"));
+                long tt3 = miscDao.insertTrainerType(new TrainerType("Yoga Instructor"));
+                long tt4 = miscDao.insertTrainerType(new TrainerType("Pilates Instructor"));
+                long tt5 = miscDao.insertTrainerType(new TrainerType("CrossFit L1 Trainer"));
+                long tt6 = miscDao.insertTrainerType(new TrainerType("Nutritionist"));
+                long tt7 = miscDao.insertTrainerType(new TrainerType("Boxing Coach"));
+                long tt8 = miscDao.insertTrainerType(new TrainerType("HIIT Specialist"));
+                long tt9 = miscDao.insertTrainerType(new TrainerType("Senior Fitness Coach"));
+                long tt10 = miscDao.insertTrainerType(new TrainerType("Sports Physiotherapist"));
 
-                // 3. Populate Equipment Table (10 records)
-                miscDao.insertEquipment(
-                        new Equipment("Free Weights"), new Equipment("Cardio Machines"),
-                        new Equipment("Resistance Machines"), new Equipment("Kettlebells"),
-                        new Equipment("Rowing Machines"), new Equipment("TRX Suspension Trainers"),
-                        new Equipment("Battle Ropes"), new Equipment("Plyometric Boxes"),
-                        new Equipment("Smith Machine"), new Equipment("Cable Crossover")
-                );
+                // 2. Populate GymClassType Table and get IDs
+                long gct1 = miscDao.insertGymClassType(new GymClassType("Spin Class"));
+                long gct2 = miscDao.insertGymClassType(new GymClassType("Zumba"));
+                long gct3 = miscDao.insertGymClassType(new GymClassType("Yoga"));
+                long gct4 = miscDao.insertGymClassType(new GymClassType("Pilates Reformer"));
+                long gct5 = miscDao.insertGymClassType(new GymClassType("CrossFit WOD"));
+                long gct6 = miscDao.insertGymClassType(new GymClassType("HIIT Circuit"));
+                long gct7 = miscDao.insertGymClassType(new GymClassType("Boxing Fundamentals"));
+                long gct8 = miscDao.insertGymClassType(new GymClassType("Aqua Aerobics"));
+                long gct9 = miscDao.insertGymClassType(new GymClassType("BodyPump"));
+                long gct10 = miscDao.insertGymClassType(new GymClassType("Seniors Mobility"));
 
-                // 4. Populate Gym Table (10 records)
-                gymDao.insertGym(new Gym("Fitness Center", "Main Street", 123, "A modern fitness center", 50, "6:00 AM - 10:00 PM"));
-                gymDao.insertGym(new Gym("Power Gym", "Oak Avenue", 456, "Strength training focused gym", 60, "5:00 AM - 11:00 PM"));
-                gymDao.insertGym(new Gym("Wellness Studio", "Park Road", 789, "Yoga and wellness focused", 40, "7:00 AM - 9:00 PM"));
-                gymDao.insertGym(new Gym("Iron Paradise", "Heugh Road", 101, "For serious bodybuilders", 75, "24 Hours"));
-                gymDao.insertGym(new Gym("The Fitness Hub", "Cape Road", 212, "All-in-one family fitness", 55, "5:30 AM - 10:00 PM"));
-                gymDao.insertGym(new Gym("Bayfront Boxing Club", "Marine Drive", 333, "Boxing and combat sports", 65, "10:00 AM - 9:00 PM"));
-                gymDao.insertGym(new Gym("PE CrossFit", "Walmer Boulevard", 450, "High-Intensity Interval Training", 80, "6:00 AM - 8:00 PM"));
-                gymDao.insertGym(new Gym("Zen Yoga & Pilates", "Stanley Street", 500, "Mind and body wellness", 45, "8:00 AM - 7:00 PM"));
-                gymDao.insertGym(new Gym("Family Active Centre", "Buffelsfontein Road", 610, "Gym with childcare facilities", 50, "7:00 AM - 8:00 PM"));
-                gymDao.insertGym(new Gym("Ultimate Performance", "Circular Drive", 720, "Elite athlete training facility", 90, "By Appointment"));
+                // 3. Populate Equipment Table and get IDs
+                long eq1 = miscDao.insertEquipment(new Equipment("Free Weights"));
+                long eq2 = miscDao.insertEquipment(new Equipment("Cardio Machines"));
+                long eq3 = miscDao.insertEquipment(new Equipment("Resistance Machines"));
+                long eq4 = miscDao.insertEquipment(new Equipment("Kettlebells"));
+                long eq5 = miscDao.insertEquipment(new Equipment("Rowing Machines"));
+                long eq6 = miscDao.insertEquipment(new Equipment("TRX Suspension Trainers"));
+                long eq7 = miscDao.insertEquipment(new Equipment("Battle Ropes"));
+                long eq8 = miscDao.insertEquipment(new Equipment("Plyometric Boxes"));
+                long eq9 = miscDao.insertEquipment(new Equipment("Smith Machine"));
+                long eq10 = miscDao.insertEquipment(new Equipment("Cable Crossover"));
+
+                // 4. Populate Gym Table and get IDs
+                long gym1 = gymDao.insertGym(new Gym("Fitness Center", 123, "Main Street", "A modern fitness center", 50.0, null, "6:00 AM", "10:00 PM"));
+                long gym2 = gymDao.insertGym(new Gym("Power Gym", 456, "Oak Avenue", "Strength training focused gym", 60.0, null, "5:00 AM", "11:00 PM"));
+                long gym3 = gymDao.insertGym(new Gym("Wellness Studio", 789, "Park Road", "Yoga and wellness focused", 40.0, null, "7:00 AM", "9:00 PM"));
+                long gym4 = gymDao.insertGym(new Gym("Iron Paradise", 101, "Heugh Road", "For serious bodybuilders", 75.0, null, "24 Hours", "24 Hours"));
+                long gym5 = gymDao.insertGym(new Gym("The Fitness Hub", 212, "Cape Road", "All-in-one family fitness", 55.0, null, "5:30 AM", "10:00 PM"));
+                long gym6 = gymDao.insertGym(new Gym("Bayfront Boxing Club", 333, "Marine Drive", "Boxing and combat sports", 65.0, null, "10:00 AM", "9:00 PM"));
+                long gym7 = gymDao.insertGym(new Gym("PE CrossFit", 450, "Walmer Boulevard", "High-Intensity Interval Training", 80.0, null, "6:00 AM", "8:00 PM"));
+                long gym8 = gymDao.insertGym(new Gym("Zen Yoga & Pilates", 500, "Stanley Street", "Mind and body wellness", 45.0, null, "8:00 AM", "7:00 PM"));
+                long gym9 = gymDao.insertGym(new Gym("Family Active Centre", 610, "Buffelsfontein Road", "Gym with childcare facilities", 50.0, null, "7:00 AM", "8:00 PM"));
+                long gym10 = gymDao.insertGym(new Gym("Ultimate Performance", 720, "Circular Drive", "Elite athlete training facility", 90.0, null, "By Appointment", "By Appointment"));
+
+                // 5. Create Links between Gyms and Features
+                // Link "Power Gym" (gym2) to Free Weights (eq1), Strength Coach (tt2), and BodyPump (gct9)
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym2; equipID = (int) eq1; }});
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym2; trainerID = (int) tt2; }});
+                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym2; classID = (int) gct9; }});
+
+                // Link "Wellness Studio" (gym3) to Yoga (gct3), Pilates (gct4), and a Yoga Instructor (tt3)
+                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym3; classID = (int) gct3; }});
+                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym3; classID = (int) gct4; }});
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym3; trainerID = (int) tt3; }});
+
+                // Link "PE CrossFit" (gym7) to Kettlebells (eq4), Rowing Machines (eq5), and a CrossFit Trainer (tt5)
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym7; equipID = (int) eq4; }});
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym7; equipID = (int) eq5; }});
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym7; trainerID = (int) tt5; }});
 
             });
         }

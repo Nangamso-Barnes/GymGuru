@@ -2,18 +2,16 @@ package com.example.gymfinder.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData; // Make sure to import LiveData
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.gymfinder.Database.AppDatabase;
 import com.example.gymfinder.Database.Gym;
 import com.example.gymfinder.R;
-
 import java.util.List;
 
 public class GymListActivity extends AppCompatActivity {
@@ -37,7 +35,7 @@ public class GymListActivity extends AppCompatActivity {
 
         // Setup RecyclerView
         gymRecyclerView = findViewById(R.id.gymRecyclerView);
-        gymRecyclerView.setLayoutManager(new LinearLayoutManager(this)); // Crucial step!
+        gymRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Setup Adapter and Click Listener
         gymAdapter = new GymAdapter(gym -> {
@@ -46,24 +44,18 @@ public class GymListActivity extends AppCompatActivity {
             startActivity(intent);
         });
         gymRecyclerView.setAdapter(gymAdapter);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Reload gyms when returning to the activity
-        loadGyms();
-    }
-
-    private void loadGyms() {
-
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            List<Gym> gymList = db.gymDao().getAllGyms();
-
-
-            runOnUiThread(() -> {
-                gymAdapter.setGyms(gymList);
-            });
+        // --- THIS IS THE NEW CODE ---
+        // Observe the LiveData from the database
+        db.gymDao().getAllGyms().observe(this, gyms -> {
+            // This code will run automatically whenever the data changes.
+            gymAdapter.setGyms(gyms);
         });
     }
+
+    // You no longer need onResume() or loadGyms()
+    // @Override
+    // protected void onResume() { ... }
+    //
+    // private void loadGyms() { ... }
 }

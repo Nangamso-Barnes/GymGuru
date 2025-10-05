@@ -87,5 +87,31 @@
     <string name="notifications">Notifications</string>
     <string name="gym_list">View GymList</string>
     <string name="menu">Menu</string>
+    <!-- add gym -->
+    <string name="btn_add_gym">Add Gym</string>
+    <string name="gym_name">Name</string>
+    <string name="street_number">Street number</string>
+    <string name="street_name">Street name</string>
+    <string name="operational_hours">Operational hours</string>
+    <string name="gym_price">Price</string>
+    <string name="equipment">Equipment</string>
+    <string name="fitness_classes">Fitness classes</string>
+    <string name="personal_trainers">Personal trainers</string>
+    <string name="gym_description">Description</string>
+    <string name="gym_picture">Gym picture</string>
+    <string name="btn_gympicture">Insert picture</string>
+    <string name="gymname_hint">Gym Name</string>
+    <string name="gymstreetnumber_hint">Street Number</string>
+    <string name="gymstreetname_hint">Street Name</string>
+    <string name="gymdedsc_hint">Gym Description</string>
+    <string name="gym_price_hint">Gym Price</string>
+    <string name="equipment_hint">Gym Equipment</string>
+    <string name="fitness_class_hint">Fitness Class</string>
+    <string name="personal_trainer_hint">Personal Trainer</string>
+    <string name="opening_gym_time">Select Opening Time</string>
+    <string name="closing_gym_time">Select Closing Time</string>
+    <string name="btn_gym_add_options">Add</string>
+    <string name="btnSaveAddGym">Save</string>
+    <string name="conf_add_gym">Your account was successfully added!</string>
 
 </resources>

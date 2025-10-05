@@ -12,8 +12,8 @@ public class Equipment {
 
     public String equipName;
 
-    @ColumnInfo(index = true)
-    public Integer gymCode;
+   // @ColumnInfo(index = true)
+   // public Integer gymCode;
     public Equipment() { }
 
     public Equipment(String equipName) {

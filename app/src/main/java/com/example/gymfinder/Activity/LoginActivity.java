@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         
         try {
-            AppDatabase db=AppDatabase.getInstance(this);
+            AppDatabase db = AppDatabase.getDatabase(this);
             if (db == null) {
                 Toast.makeText(getApplicationContext(),"Database error. Please try again.",Toast.LENGTH_SHORT).show();
                 return;

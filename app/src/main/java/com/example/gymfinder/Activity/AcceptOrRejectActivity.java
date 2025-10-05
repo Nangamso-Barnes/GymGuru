@@ -97,7 +97,9 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
                     gymStreetNumber.setText(String.valueOf(gym.gymStreetNumber));
                     gymDes.setText(gym.gymDescription);
                     gymPrice.setText(String.valueOf(gym.price));
-                    gymHrs.setText(gym.operationalHours);
+                    // Combine the new fields into one string for display
+                    String displayHours = gym.openingTime + " - " + gym.closingTime;
+                    gymHrs.setText(displayHours);
                 });
             }
         });

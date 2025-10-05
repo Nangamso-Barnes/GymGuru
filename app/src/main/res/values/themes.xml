@@ -5,5 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="Theme.GymFinder.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    </style>
+
     <style name="Theme.GymFinder" parent="Base.Theme.GymFinder" />
 </resources>
