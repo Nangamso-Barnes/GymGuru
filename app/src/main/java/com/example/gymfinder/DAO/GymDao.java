@@ -1,6 +1,6 @@
 package com.example.gymfinder.DAO;
 
-import androidx.lifecycle.LiveData; // <-- Import LiveData
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,22 +9,21 @@ import java.util.List;
 
 @Dao
 public interface GymDao {
+
     @Insert
     long insertGym(Gym gym);
 
-    // --- This is the improved method ---
+    // Use LiveData for reactivity
     @Query("SELECT * FROM Gym ORDER BY gymName ASC")
-    LiveData<List<Gym>> getAllGyms(); // Changed to return LiveData
+    LiveData<List<Gym>> getAllGyms();
 
     @Query("SELECT * FROM Gym WHERE gymCode = :gymCode LIMIT 1")
     Gym getGymByCode(int gymCode);
 
     @Query("DELETE FROM Gym WHERE gymCode = :gymCode")
     int deleteGym(int gymCode);
-<<<<<<< HEAD
-=======
 
-    @Query("SELECT DISTINCT startTime || ' - ' || endTime FROM Gym")
-    List<String> getDistinctTimeSlots();
->>>>>>> da337631b2a496b88d3d07b69ad18d459239b937
+    // Keep your partner’s distinct time slot method
+   // @Query("SELECT DISTINCT startTime || ' - ' || endTime FROM Gym")
+   // List<String> getDistinctTimeSlots();
 }
