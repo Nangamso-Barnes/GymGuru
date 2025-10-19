@@ -6,4 +6,9 @@ import androidx.room.Entity;
 public class GymClassCrossRef {
     public int gymCode;
     public int classID;
+
+    public GymClassCrossRef(int gymCode, int classID) {
+        this.gymCode = gymCode;
+        this.classID = classID;
+    }
 }

@@ -29,6 +29,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -38,6 +41,9 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.ads.mobile.sdk)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     testImplementation(libs.junit)

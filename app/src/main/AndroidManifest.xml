@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -15,12 +16,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
-
+        <activity
+            android:name=".Activity.ViewGymReport"
+            android:exported="false"
+            android:theme="@style/Theme.GymFinder" />
+        <activity
+            android:name=".Activity.FeedbackEditGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FeedbackAddGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FeedbackDeletionOfGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeleteGymConfirmation"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DeleteGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.EditGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ListOfActivityFromTheDatabase"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ListOfGymsFromDatabase"
+            android:exported="false"
+            android:theme="@style/Theme.GymFinder" />
         <activity
             android:name=".Activity.AddGym"
-            android:label=""
-            android:exported="false" />
-
+            android:exported="false"
+            android:label="" />
         <activity
             android:name=".Activity.QuestionnaireActivity"
             android:exported="false" />
@@ -72,16 +100,15 @@
         <activity
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activity.CompleteQuestionaireActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
