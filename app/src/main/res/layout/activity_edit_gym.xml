@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/addnewgym"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
     tools:context=".Activity.AddGym">
@@ -25,7 +24,7 @@
         android:id="@+id/txtAddGym"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_add_gym"
+        android:text="@string/txt_edit_gym"
         android:textColor="@color/grey"
         android:textSize="26sp"
         android:textStyle="bold"

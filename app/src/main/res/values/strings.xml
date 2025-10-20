@@ -90,7 +90,7 @@
     <string name="gym_list">View GymList</string>
     <string name="menu">Menu</string>
     <!-- add gym -->
-    <string name="btn_add_gym">Add Gym</string>
+    <string name="btn_add_gym">ADD GYM</string>
     <string name="gym_name">Name</string>
     <string name="street_number">Street number</string>
     <string name="street_name">Street name</string>
@@ -101,7 +101,7 @@
     <string name="personal_trainers">Personal trainers</string>
     <string name="gym_description">Description</string>
     <string name="gym_picture">Gym picture</string>
-    <string name="btn_gympicture">Insert picture</string>
+    <string name="btn_gympicture">INSERT PICTURE</string>
     <string name="gymname_hint">Gym Name</string>
     <string name="gymstreetnumber_hint">Street Number</string>
     <string name="gymstreetname_hint">Street Name</string>
@@ -112,8 +112,27 @@
     <string name="personal_trainer_hint">Personal Trainer</string>
     <string name="opening_gym_time">Select Opening Time</string>
     <string name="closing_gym_time">Select Closing Time</string>
-    <string name="btn_gym_add_options">Add</string>
-    <string name="btnSaveAddGym">Save</string>
+    <string name="btn_gym_add_options">ADD</string>
+    <string name="btnSaveAddGym">SAVE</string>
     <string name="conf_add_gym">Your account was successfully added!</string>
+    <!--list of gyms -->
+    <string name="list_of_gyms">Gyms</string>
+    <!--Edit gym -->
+    <string name="txt_edit_gym">Edit Gym</string>
+    <string name="conf_edit_gym">Your changes were saved."</string>
+    <!--Delete Gym-->
+    <string name="txt_delete_gym">Delete Gym</string>
+    <string name="btn_delete_gym_account">DELETE ACCOUNT</string>
+    <string name="confirmation_message">Are you sure you want to delete your account?</string>
+    <string name="cancel_deletion">CANCEL</string>
+    <string name="continue_deletion">DELETE</string>
+    <string name="feedback_message">Your account was deleted successfully</string>
+    <string name="btn_ok">OK</string>
+    <!-- GymReport -->
+    <string name="txt_gym_report">Gym Report</string>
+
+
+
+
 
 </resources>

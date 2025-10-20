@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,12 +22,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gymfinder.DAO.GymDao;
 import com.example.gymfinder.DAO.MiscDao;
@@ -41,6 +36,7 @@ import com.example.gymfinder.Database.GymEquipmentCrossRef;
 import com.example.gymfinder.Database.GymTrainerCrossRef;
 import com.example.gymfinder.Database.TrainerType;
 import com.example.gymfinder.R;
+import com.google.android.material.chip.Chip; // --- IMPROVED --- Import Material Chip
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -56,7 +52,7 @@ public class AddGym extends AppCompatActivity {
     private EditText inputEquipment, inputFitnessClass, inputPersonalTrainer;
     private TextView gymOpeningTime, gymClosingTime;
     private LinearLayout equipmentChipContainer, fitnessClassChipContainer, trainerChipContainer;
-    private ImageView gymImage;
+    private ImageView gymImage, backButton;
     private Uri imageUri;
 
     // Data Lists
@@ -64,7 +60,6 @@ public class AddGym extends AppCompatActivity {
     private final ArrayList<String> fitnessClassList = new ArrayList<>();
     private final ArrayList<String> trainerList = new ArrayList<>();
 
-    // The modern way to handle activity results for picking an image
     private final ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -78,21 +73,6 @@ public class AddGym extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_gym);
-
-        // Correctly handles screen insets to prevent UI from hiding under system bars
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.add_gym), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-       //  Setup Toolbar
-      //  Toolbar toolbar = findViewById(R.id.toolbar_add_gym);
-      //  setSupportActionBar(toolbar);
-    //  if (getSupportActionBar() != null) {
-       //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       //     getSupportActionBar().setDisplayShowHomeEnabled(true);
-       // }
 
         // Initialize Views
         gymName = findViewById(R.id.inputGymName);
@@ -109,19 +89,19 @@ public class AddGym extends AppCompatActivity {
         fitnessClassChipContainer = findViewById(R.id.fitnessClassChipContainer);
         trainerChipContainer = findViewById(R.id.trainerChipContainer);
         gymImage = findViewById(R.id.gymImage);
+        backButton = findViewById(R.id.backButton);
 
         // Set OnClick Listeners
         gymOpeningTime.setOnClickListener(v -> showTimePicker(gymOpeningTime));
         gymClosingTime.setOnClickListener(v -> showTimePicker(gymClosingTime));
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
-    // Replace your existing onClickSave method with this one
     public void onClickSave(View view) {
         if (!validation()) {
             return;
         }
 
-        // This part is still correct
         String name = gymName.getText().toString().trim();
         int streetNo = Integer.parseInt(gymStrNo.getText().toString().trim());
         String streetName = gymStrName.getText().toString().trim();
@@ -137,59 +117,46 @@ public class AddGym extends AppCompatActivity {
         GymDao gymDao = db.gymDao();
         MiscDao miscDao = db.miscDao();
 
-        // --- THIS IS THE CORRECTED LOGIC ---
+        // --- CORRECTED LOGIC ---
         AppDatabase.databaseWriteExecutor.execute(() -> {
             try {
-                // 1. Insert the Gym and get its ID
+                // 1. Insert the Gym and get its new ID
                 long gymId = gymDao.insertGym(newGym);
 
                 // 2. Handle Equipment
                 for (String equipmentName : equipmentList) {
-                    // Insert into the master Equipment table and get its ID
                     long equipId = miscDao.insertEquipment(new Equipment(equipmentName));
-                    // Create the link in the join table
-                    GymEquipmentCrossRef crossRef = new GymEquipmentCrossRef();
-                    crossRef.gymCode = (int) gymId;
-                    crossRef.equipID = (int) equipId;
-                    miscDao.insertGymEquipmentCrossRef(crossRef);
+                    miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef((int) gymId, (int) equipId)); // Use correct constructor
                 }
 
                 // 3. Handle Fitness Classes
                 for (String className : fitnessClassList) {
-                    // Insert into the master GymClassType table and get its ID
                     long classId = miscDao.insertGymClassType(new GymClassType(className));
-                    // Create the link in the join table
-                    GymClassCrossRef crossRef = new GymClassCrossRef();
-                    crossRef.gymCode = (int) gymId;
-                    crossRef.classID = (int) classId;
-                    miscDao.insertGymClassCrossRef(crossRef);
+                    miscDao.insertGymClassCrossRef(new GymClassCrossRef((int) gymId, (int) classId)); // Use correct constructor
                 }
 
                 // 4. Handle Trainers
                 for (String trainerName : trainerList) {
-                    // Insert into the master TrainerType table and get its ID
                     long trainerId = miscDao.insertTrainerType(new TrainerType(trainerName));
-                    // Create the link in the join table
-                    GymTrainerCrossRef crossRef = new GymTrainerCrossRef();
-                    crossRef.gymCode = (int) gymId;
-                    crossRef.trainerID = (int) trainerId;
-                    miscDao.insertGymTrainerCrossRef(crossRef);
+                    miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef((int) gymId, (int) trainerId)); // Use correct constructor
                 }
 
-                // 5. Show success message on the UI thread
+                // 5. Navigate to feedback screen on the UI thread
                 runOnUiThread(() -> {
-                    Toast.makeText(getApplicationContext(), "Gym added successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AddGym.this, FeedbackAddGym.class);
+                    startActivity(intent);
                     finish();
                 });
 
             } catch (Exception e) {
-                runOnUiThread(() -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(this, "Error saving data: " + e.getMessage(), Toast.LENGTH_LONG).show());
                 e.printStackTrace();
             }
         });
     }
 
     private boolean validation() {
+        // Your validation logic is good, no changes needed here.
         if (gymName.getText().toString().trim().isEmpty()) {
             gymName.setError("Gym name is required!");
             return false;
@@ -229,6 +196,7 @@ public class AddGym extends AppCompatActivity {
     }
 
     private void showTimePicker(TextView timeField) {
+        // No changes needed here.
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 this,
@@ -244,6 +212,7 @@ public class AddGym extends AppCompatActivity {
     }
 
     public void onClickAddPicture(View view) {
+        // No changes needed here.
         String permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
                 ? Manifest.permission.READ_MEDIA_IMAGES
                 : Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -274,6 +243,7 @@ public class AddGym extends AppCompatActivity {
     }
 
     public void onClickAddEquipment(View view) {
+        // No changes needed here.
         String name = inputEquipment.getText().toString().trim();
         if (!name.isEmpty() && !equipmentList.contains(name)) {
             equipmentList.add(name);
@@ -283,6 +253,7 @@ public class AddGym extends AppCompatActivity {
     }
 
     public void onClickAddFitnessClass(View view) {
+        // No changes needed here.
         String name = inputFitnessClass.getText().toString().trim();
         if (!name.isEmpty() && !fitnessClassList.contains(name)) {
             fitnessClassList.add(name);
@@ -292,6 +263,7 @@ public class AddGym extends AppCompatActivity {
     }
 
     public void onClickAddTrainer(View view) {
+        // No changes needed here.
         String name = inputPersonalTrainer.getText().toString().trim();
         if (!name.isEmpty() && !trainerList.contains(name)) {
             trainerList.add(name);
@@ -300,27 +272,21 @@ public class AddGym extends AppCompatActivity {
         }
     }
 
+    // --- IMPROVED CHIP METHOD ---
     private void addChip(String text, LinearLayout container, ArrayList<String> list) {
-        View chipView = getLayoutInflater().inflate(R.layout.chip_item, container, false);
-        TextView chipText = chipView.findViewById(R.id.chip_text);
-        ImageButton removeButton = chipView.findViewById(R.id.chip_remove);
-
-        chipText.setText(text);
-        removeButton.setOnClickListener(v -> {
+        Chip chip = new Chip(this);
+        chip.setText(text);
+        chip.setCloseIconVisible(true);
+        chip.setOnCloseIconClickListener(v -> {
             list.remove(text);
-            container.removeView(chipView);
+            container.removeView(chip);
         });
-        container.addView(chipView);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        container.addView(chip);
     }
 
     @Override
     public void onBackPressed() {
+        // No changes needed here.
         new AlertDialog.Builder(this)
                 .setTitle("Discard Changes?")
                 .setMessage("Are you sure you want to go back? Any unsaved information will be lost.")
