@@ -33,7 +33,7 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_or_reject);
 
-        // Standard boilerplate for insets
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,8 +46,6 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
         gymStreetNumber = findViewById(R.id.gymStreetNumber);
         gymDes = findViewById(R.id.gymDes);
         gymPrice = findViewById(R.id.gymPrice);
-        // UPDATED: Initialize start and end time EditTexts
-        // Make sure these IDs match your updated XML layout
         gymStartTime = findViewById(R.id.gymStartTime);
         gymEndTime = findViewById(R.id.gymEndTime);
         btnAccept = findViewById(R.id.btnAccept);
@@ -97,8 +95,8 @@ public class AcceptOrRejectActivity extends AppCompatActivity {
                     gymStreetNumber.setText(String.valueOf(gym.gymStreetNumber));
                     gymDes.setText(gym.gymDescription);
                     gymPrice.setText(String.valueOf(gym.price));
-                    gymStartTime.setText(gym.startTime);
-                    gymEndTime.setText(gym.endTime);
+                    gymStartTime.setText(gym.openingTime);
+                    gymEndTime.setText(gym.closingTime);
                 });
             }
         });

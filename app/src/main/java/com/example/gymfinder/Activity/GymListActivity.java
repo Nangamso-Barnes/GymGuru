@@ -53,9 +53,5 @@ public class GymListActivity extends AppCompatActivity {
         });
     }
 
-    // You no longer need onResume() or loadGyms()
-    // @Override
-    // protected void onResume() { ... }
-    //
-    // private void loadGyms() { ... }
+
 }

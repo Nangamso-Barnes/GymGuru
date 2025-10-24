@@ -67,9 +67,7 @@
         <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activity.ViewProfileDetailsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activity.DeleteQuestionListActivity"
             android:exported="false" />
@@ -92,7 +90,7 @@
             android:name=".Activity.AcceptOrRejectActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.GymListActivity"
+            android:name=".Activity.CompleteQuestionaireActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.DIYActivity"
@@ -101,7 +99,7 @@
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CompleteQuestionaireActivity"
+            android:name=".Activity.GymListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

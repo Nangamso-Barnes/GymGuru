@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData; // <-- Import LiveData
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
-
 import com.example.gymfinder.Database.Gym;
 import java.util.List;
 
@@ -24,10 +22,8 @@ public interface GymDao {
     @Query("DELETE FROM Gym WHERE gymCode = :gymCode")
     int deleteGym(int gymCode);
 
-    @Update
-    void updateGym(Gym gym);
-    @Query("SELECT DISTINCT startTime || ' - ' || endTime FROM Gym")
-    List<String> getDistinctTimeSlots();
 
+    @Query("SELECT DISTINCT openingTime || ' - ' || closingTime FROM Gym")
+    List<String> getDistinctTimeSlots();
 
 }
