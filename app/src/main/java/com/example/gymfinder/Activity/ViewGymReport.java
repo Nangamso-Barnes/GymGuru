@@ -17,6 +17,7 @@ import com.example.gymfinder.Database.ReportResult;
 import com.example.gymfinder.HelperMethods.ReportAdapter; // Ensure this import is correct
 import com.example.gymfinder.R;
 
+
 import java.util.ArrayList;
 import java.util.List;
 

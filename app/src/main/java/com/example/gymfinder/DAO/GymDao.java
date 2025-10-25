@@ -29,4 +29,8 @@ public interface GymDao {
     @Query("SELECT DISTINCT openingTime || ' - ' || closingTime FROM Gym")
     List<String> getDistinctTimeSlots();
 
+    // This is for the matching algorithm's background thread
+    @Query("SELECT * FROM Gym")
+    List<Gym> getAllGymsSync();
+
 }

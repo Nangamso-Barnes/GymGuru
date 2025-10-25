@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.gymfinder.HelperMethods;
+=======
+package com.example.gymfinder.HelperMethods; // This now matches the file's location
+>>>>>>> 536b443a752ee791cff3d560523de874951a16b6
 
 import android.view.LayoutInflater;
 import android.view.View;

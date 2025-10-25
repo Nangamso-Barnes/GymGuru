@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gymfinder.QuestionAdapter;
+import com.example.gymfinder.HelperMethods.QuestionAdapter;
 import com.example.gymfinder.DAO.QuestionDao;
 import com.example.gymfinder.Database.AppDatabase;
 import com.example.gymfinder.Database.Question;

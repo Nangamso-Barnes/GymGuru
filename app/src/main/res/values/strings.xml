@@ -31,7 +31,11 @@
 
     <string name="home_tagline">Help us help you find the perfect gym!!</string>
     <string name="button_go"><![CDATA[>>>>GO>>>>]]></string>
+    <string name="button_view_profile">VIEW PROFILE</string>
+    <string name="potential_gym_list">Potential Gym List</string>
 
+<string name="hint_admin_code">Admin Code</string>
+    <string name="cd_admin_code">Admin Code Input</string>
 
     <string name="edit_profile_title">Edit Profile</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
@@ -130,6 +134,7 @@
     <string name="btn_ok">OK</string>
     <!-- GymReport -->
     <string name="txt_gym_report">Gym Report</string>
+<<<<<<< HEAD
     <!-- Edit user Profile -->
     <string name="txt_delete_user_profile">Delete Profile</string>
     <string-array name="report_options_global">
@@ -139,6 +144,8 @@
         <item>Most Popular Trainers (All Gyms)</item>
     </string-array>
 
+=======
+>>>>>>> 536b443a752ee791cff3d560523de874951a16b6
 
 
 </resources>

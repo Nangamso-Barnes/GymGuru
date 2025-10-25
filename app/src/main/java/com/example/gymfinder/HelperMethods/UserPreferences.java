@@ -1,4 +1,4 @@
-package com.example.gymfinder.Database;
+package com.example.gymfinder.HelperMethods;
 
 public class UserPreferences {
     public double budget = Double.MAX_VALUE; // Default to max price

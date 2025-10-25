@@ -1,4 +1,4 @@
-package com.example.gymfinder;
+package com.example.gymfinder.HelperMethods;
 
 import android.app.Activity;
 import android.app.AlertDialog;
