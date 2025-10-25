@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData; // <-- Import LiveData
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
+
 import com.example.gymfinder.Database.Gym;
 import java.util.List;
 
@@ -11,10 +13,11 @@ import java.util.List;
 public interface GymDao {
     @Insert
     long insertGym(Gym gym);
+    @Update
+    int updateGym(Gym gym);
 
-    // --- This is the improved method ---
     @Query("SELECT * FROM Gym ORDER BY gymName ASC")
-    LiveData<List<Gym>> getAllGyms(); // Changed to return LiveData
+    LiveData<List<Gym>> getAllGyms();
 
     @Query("SELECT * FROM Gym WHERE gymCode = :gymCode LIMIT 1")
     Gym getGymByCode(int gymCode);

@@ -1,4 +1,4 @@
-package com.example.gymfinder; // This now matches the file's location
+package com.example.gymfinder.HelperMethods;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.gymfinder.Database.ReportResult; // This import is still correct
+import com.example.gymfinder.R;
+
 import java.util.List;
 
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {

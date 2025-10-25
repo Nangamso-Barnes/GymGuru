@@ -1,4 +1,3 @@
-// FileName: ListOfActivityFromTheDatabase.java
 package com.example.gymfinder.Activity;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider; // Import this
 
 import com.example.gymfinder.Database.AppDatabase;
 import com.example.gymfinder.Database.Gym;
@@ -17,12 +15,12 @@ import com.example.gymfinder.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfActivityFromTheDatabase extends AppCompatActivity {
+public class ListOfGymsFromTheDatabase extends AppCompatActivity {
 
     private ListView gymListView;
     private AppDatabase appDatabase;
-    private List<Gym> gymList = new ArrayList<>(); // To hold the full gym objects
-    private ArrayAdapter<String> adapter; // Make adapter a field to update it
+    private List<Gym> gymList = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +41,11 @@ public class ListOfActivityFromTheDatabase extends AppCompatActivity {
         // 4. Set click listener
         gymListView.setOnItemClickListener((parent, view, position, id) -> {
             Gym selectedGym = gymList.get(position);
-            Toast.makeText(ListOfActivityFromTheDatabase.this,
+            Toast.makeText(ListOfGymsFromTheDatabase.this,
                     "You selected: " + selectedGym.gymName,
                     Toast.LENGTH_SHORT).show();
 
-            Intent intent =new Intent(ListOfActivityFromTheDatabase.this, EditGym.class);
+            Intent intent =new Intent(ListOfGymsFromTheDatabase.this, EditGym.class);
             intent.putExtra("gymCode",selectedGym.gymCode);
             startActivity(intent);
         });
@@ -71,7 +69,7 @@ public class ListOfActivityFromTheDatabase extends AppCompatActivity {
                     gymNames.add(gym.gymName);
                 }
 
-                // Clear the adapter and add the new data
+
                 adapter.clear();
                 adapter.addAll(gymNames);
                 adapter.notifyDataSetChanged(); // Tell the ListView to refresh

@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/addnewgym"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
     tools:context=".Activity.AddGym">
@@ -56,37 +56,34 @@
             <EditText
                 android:id="@+id/inputGymName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:background="@color/white"
                 android:hint="@string/gymname_hint"
                 android:inputType="text"
-                android:minHeight="48dp"
                 android:padding="12dp"
+                android:gravity="center_vertical"
                 android:textSize="16sp" />
-
             <EditText
                 android:id="@+id/inpustreetnumber"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:hint="@string/gymstreetnumber_hint"
                 android:inputType="number"
-                android:minHeight="48dp"
-                android:padding="12dp" />
-
+                android:padding="12dp"
+                android:gravity="center_vertical" />
             <EditText
                 android:id="@+id/inputStrName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:hint="@string/gymstreetname_hint"
                 android:inputType="text"
-                android:minHeight="48dp"
                 android:padding="12dp"
+                android:gravity="center_vertical"
                 android:textSize="16sp" />
-
             <EditText
                 android:id="@+id/gymDescription"
                 android:layout_width="match_parent"
@@ -97,175 +94,196 @@
                 android:hint="@string/gymdedsc_hint"
                 android:inputType="textMultiLine"
                 android:minLines="2"
+                android:padding="12dp"
                 android:textSize="16sp" />
-
             <EditText
                 android:id="@+id/inputgymPrice"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
-                android:gravity="start|top"
+                android:gravity="center_vertical"
                 android:hint="@string/gym_price_hint"
                 android:inputType="number"
+                android:padding="12dp"
                 android:textSize="16sp" />
-
             <TextView
                 android:id="@+id/txtOpeningTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:drawable/editbox_background"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:hint="@string/opening_gym_time"
-                android:minHeight="48dp"
                 android:padding="12dp"
                 android:textSize="16sp" />
-
             <TextView
                 android:id="@+id/txtClosingTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:drawable/editbox_background"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:hint="@string/closing_gym_time"
-                android:minHeight="48dp"
                 android:padding="12dp"
                 android:textSize="16sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/inputEquipment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="@string/equipment_hint"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnAddEquipment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:onClick="onClickAddEquipment"
-                    android:text="@string/btn_gym_add_options" />
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:scrollbars="none">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <LinearLayout
-                    android:id="@+id/equipmentChipContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp" />
-            </HorizontalScrollView>
+                    android:orientation="horizontal">
 
+                    <EditText
+                        android:id="@+id/inputEquipment"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/edit_text"
+                        android:hint="@string/equipment_hint"
+                        android:inputType="text"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btnAddEquipment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:onClick="onClickAddEquipment"
+                        android:text="@string/btn_gym_add_options" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/equipmentChipContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp" />
+                </HorizontalScrollView>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/inputFitnessClass"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="@string/fitness_class_hint"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnAddFitnessClass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:onClick="onClickAddFitnessClass"
-                    android:text="@string/btn_gym_add_options" />
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:scrollbars="none">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <LinearLayout
-                    android:id="@+id/fitnessClassChipContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp" />
-            </HorizontalScrollView>
+                    android:orientation="horizontal">
 
+                    <EditText
+                        android:id="@+id/inputFitnessClass"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/edit_text"
+                        android:hint="@string/fitness_class_hint"
+                        android:inputType="text"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btnAddFitnessClass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:onClick="onClickAddFitnessClass"
+                        android:text="@string/btn_gym_add_options" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/fitnessClassChipContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp" />
+                </HorizontalScrollView>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/inputPersonalTrainer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="@string/personal_trainer_hint"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/btnAddTrainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:onClick="onClickAddTrainer"
-                    android:text="@string/btn_gym_add_options" />
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:scrollbars="none">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <LinearLayout
-                    android:id="@+id/trainerChipContainer"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="4dp" />
-            </HorizontalScrollView>
+                    android:orientation="horizontal">
 
+                    <EditText
+                        android:id="@+id/inputPersonalTrainer"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/edit_text"
+                        android:hint="@string/personal_trainer_hint"
+                        android:inputType="text"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btnAddTrainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:onClick="onClickAddTrainer"
+                        android:text="@string/btn_gym_add_options" />
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/trainerChipContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp" />
+                </HorizontalScrollView>
+            </LinearLayout>
             <Button
                 android:id="@+id/btnAddGymPic"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:onClick="onClickAddPicture"
                 android:text="@string/btn_gympicture" />
@@ -281,8 +299,9 @@
             <Button
                 android:id="@+id/savebtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:onClick="onClickSave"
                 android:text="@string/btnSaveAddGym" />
 

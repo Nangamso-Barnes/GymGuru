@@ -20,5 +20,8 @@ public interface UserDao {
 
     @Update
     int updateUser(User user);
+    @Query("DELETE FROM User WHERE userID = :id")
+    void deleteUserById(int id);
+
 
 }

@@ -55,44 +55,35 @@ public class DeleteGym extends AppCompatActivity {
                 return;
             }
 
-            // Keep a local copy of the full Gym objects
             this.gymList.clear();
             this.gymList.addAll(updatedGymList);
 
-            // Create a list of just the names to display in the spinner
             ArrayList<String> gymNames = new ArrayList<>();
             for (Gym gym : this.gymList) {
                 gymNames.add(gym.gymName);
             }
 
-            // Update the adapter with the new gym names
             spinnerAdapter.clear();
             spinnerAdapter.addAll(gymNames);
             spinnerAdapter.notifyDataSetChanged();
         });
     }
 
-    // This method is called by the android:onClick attribute in your XML
     public void onClickDeleteGym(View view) {
-        // Check if there are any gyms loaded
+
         if (gymList.isEmpty()) {
             Toast.makeText(this, "There are no gyms to delete.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Get the position of the selected item in the spinner
         int selectedPosition = gymSpinner.getSelectedItemPosition();
 
-        // Get the corresponding Gym object from our list
         Gym selectedGym = gymList.get(selectedPosition);
 
-        // Create an intent to start the confirmation activity
         Intent intent = new Intent(DeleteGym.this, DeleteGymConfirmation.class);
 
-        // Pass the unique ID of the gym to be deleted
         intent.putExtra("GYM_ID_TO_DELETE", selectedGym.gymCode);
 
-        // Start the activity
         startActivity(intent);
     }
 }

@@ -109,22 +109,22 @@ public abstract class AppDatabase extends RoomDatabase {
                 long gym9 = gymDao.insertGym(new Gym("Family Active Centre", 610, "Buffelsfontein Road", "Gym with childcare facilities", 50.0, null, "7:00 AM", "8:00 PM"));
                 long gym10 = gymDao.insertGym(new Gym("Ultimate Performance", 720, "Circular Drive", "Elite athlete training facility", 90.0, null, "By Appointment", "By Appointment"));
 
-                // 5. Create Links between Gyms and Features
-                // Link "Power Gym" (gym2) to Free Weights (eq1), Strength Coach (tt2), and BodyPump (gct9)
-                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym2; equipID = (int) eq1; }});
-                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym2; trainerID = (int) tt2; }});
-                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym2; classID = (int) gct9; }});
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef((int) gym2, (int) eq1));
 
-                // Link "Wellness Studio" (gym3) to Yoga (gct3), Pilates (gct4), and a Yoga Instructor (tt3)
-                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym3; classID = (int) gct3; }});
-                miscDao.insertGymClassCrossRef(new GymClassCrossRef() {{ gymCode = (int) gym3; classID = (int) gct4; }});
-                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym3; trainerID = (int) tt3; }});
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef((int) gym2, (int) tt2));
 
-                // Link "PE CrossFit" (gym7) to Kettlebells (eq4), Rowing Machines (eq5), and a CrossFit Trainer (tt5)
-                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym7; equipID = (int) eq4; }});
-                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef() {{ gymCode = (int) gym7; equipID = (int) eq5; }});
-                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef() {{ gymCode = (int) gym7; trainerID = (int) tt5; }});
+                miscDao.insertGymClassCrossRef(new GymClassCrossRef((int) gym2, (int) gct9));
 
+                miscDao.insertGymClassCrossRef(new GymClassCrossRef((int) gym3, (int) gct3));
+
+
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef((int) gym3, (int) tt3));
+
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef((int) gym7, (int) eq4));
+
+                miscDao.insertGymEquipmentCrossRef(new GymEquipmentCrossRef((int) gym7, (int) eq5));
+
+                miscDao.insertGymTrainerCrossRef(new GymTrainerCrossRef((int) gym7, (int) tt5));
             });
         }
     };

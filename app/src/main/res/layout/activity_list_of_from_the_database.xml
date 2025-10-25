@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    tools:context=".Activity.ListOfActivityFromTheDatabase">
+    tools:context=".Activity.ListOfGymsFromTheDatabase">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

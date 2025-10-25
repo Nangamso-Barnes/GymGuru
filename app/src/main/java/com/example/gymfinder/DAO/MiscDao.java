@@ -10,6 +10,7 @@ import com.example.gymfinder.Database.GymClassCrossRef;
 import com.example.gymfinder.Database.GymClassType;
 import com.example.gymfinder.Database.GymEquipmentCrossRef;
 import com.example.gymfinder.Database.GymTrainerCrossRef;
+import com.example.gymfinder.Database.ReportResult;
 import com.example.gymfinder.Database.TrainerType;
 
 import java.util.List;
@@ -78,25 +79,26 @@ public interface MiscDao {
     @Query("SELECT GCT.fitnessClass as name, COUNT(GC.classID) as count " +
             "FROM GymClassCrossRef GC " +
             "JOIN GymClassType GCT ON GC.classID = GCT.classID " +
-            "WHERE GC.gymCode = :gymCode " +
+            // "WHERE GC.gymCode = :gymCode " + // REMOVED THIS LINE
             "GROUP BY GCT.fitnessClass " +
             "ORDER BY count DESC")
-    List<ReportResult> getMostPopularClasses(int gymCode);
+    List<ReportResult> getMostPopularClassesGlobal(); // Renamed for clarity
 
+    // --- UPDATED QUERY (Removed WHERE clause) ---
     @Query("SELECT E.equipName as name, COUNT(GE.equipID) as count " +
             "FROM GymEquipmentCrossRef GE " +
             "JOIN Equipment E ON GE.equipID = E.equipID " +
-            "WHERE GE.gymCode = :gymCode " +
+            // "WHERE GE.gymCode = :gymCode " + // REMOVED THIS LINE
             "GROUP BY E.equipName " +
             "ORDER BY count DESC")
-    List<ReportResult> getMostPopularEquipment(int gymCode);
+    List<ReportResult> getMostPopularEquipmentGlobal(); // Renamed for clarity
 
-    // --- THIS IS THE NEW METHOD YOU NEED ---
+    // --- UPDATED QUERY (Removed WHERE clause) ---
     @Query("SELECT TT.serviceList as name, COUNT(GT.trainerID) as count " +
             "FROM GymTrainerCrossRef GT " +
             "JOIN TrainerType TT ON GT.trainerID = TT.trainerID " +
-            "WHERE GT.gymCode = :gymCode " +
+            // "WHERE GT.gymCode = :gymCode " + // REMOVED THIS LINE
             "GROUP BY TT.serviceList " +
             "ORDER BY count DESC")
-    List<ReportResult> getMostPopularTrainers(int gymCode);
+    List<ReportResult> getMostPopularTrainersGlobal();
 }

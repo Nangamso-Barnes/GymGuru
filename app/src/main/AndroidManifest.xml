@@ -16,10 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
+
         <activity
             android:name=".Activity.ViewGymReport"
-            android:exported="false"
-            android:theme="@style/Theme.GymFinder" />
+            android:exported="true"
+            android:theme="@style/Theme.GymFinder">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Activity.FeedbackEditGym"
             android:exported="false" />
@@ -32,17 +39,16 @@
         <activity
             android:name=".Activity.DeleteGymConfirmation"
             android:exported="false" />
+
         <activity
             android:name=".Activity.DeleteGym"
             android:exported="false" />
+
         <activity
             android:name=".Activity.EditGym"
             android:exported="false" />
         <activity
-            android:name=".Activity.ListOfActivityFromTheDatabase"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ListOfGymsFromDatabase"
+            android:name=".Activity.ListOfGymsFromTheDatabase"
             android:exported="false"
             android:theme="@style/Theme.GymFinder" />
         <activity
@@ -67,7 +73,6 @@
         <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activity.DeleteQuestionListActivity"
             android:exported="false" />
@@ -100,13 +105,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.GymListActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

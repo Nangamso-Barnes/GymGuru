@@ -61,6 +61,10 @@
         <include
             android:id="@+id/option_notification"
             layout="@layout/list_item_option" />
+        <include
+            android:id="@+id/option_view_report"
+            layout="@layout/list_item_option" />
+
 
     </LinearLayout>
 

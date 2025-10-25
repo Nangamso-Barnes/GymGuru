@@ -1,5 +1,7 @@
 package com.example.gymfinder.Activity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -97,7 +99,50 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
+    public void onDeleteProfileClicked(View view) { // <-- 1. Added "View view"
+        // Show a confirmation dialog first
+        new AlertDialog.Builder(this)
+                .setTitle("Delete Profile")
+                .setMessage("Are you sure you want to permanently delete your profile? This action cannot be undone.")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    // --- 2. Added all deletion logic here ---
+                    if (currentUserId == -1) {
+                        Toast.makeText(this, "Error: Could not find user.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
+                    // Run the database deletion on the background thread
+                    AppDatabase.databaseWriteExecutor.execute(() -> {
+
+                        // Call the DAO method
+                        userDao.deleteUserById(currentUserId);
+
+                        // After deletion, go back to the Login screen on the UI thread
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Profile deleted successfully.", Toast.LENGTH_SHORT).show();
+
+                            // Clear the saved login session
+                            clearUserSession();
+
+                            // Create an intent to go back to LoginActivity
+                            Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
+                            // Clear the activity stack so the user can't press "back"
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        });
+                    });
+                })
+                .setNegativeButton("Cancel", null) // Do nothing if canceled
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+    private void clearUserSession() {
+        SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove("userID");
+        editor.apply();
+    }
     private void loadUserData() {
         if (currentUserId == -1) {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();

@@ -130,8 +130,14 @@
     <string name="btn_ok">OK</string>
     <!-- GymReport -->
     <string name="txt_gym_report">Gym Report</string>
-
-
+    <!-- Edit user Profile -->
+    <string name="txt_delete_user_profile">Delete Profile</string>
+    <string-array name="report_options_global">
+        <item>Select option</item>
+        <item>Most Popular Classes (All Gyms)</item>
+        <item>Most Popular Equipment (All Gyms)</item>
+        <item>Most Popular Trainers (All Gyms)</item>
+    </string-array>
 
 
 
