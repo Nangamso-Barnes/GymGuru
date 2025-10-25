@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+// Removed unused AdapterView import
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -18,7 +18,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gymfinder.Database.AppDatabase;
+import com.example.gymfinder.Database.User;
 import com.example.gymfinder.R;
+
+// --- ADD THESE IMPORTS ---
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity {
     EditText LoginUserName;
@@ -27,20 +32,25 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtNewUser;
     Spinner spinnerUserType;
 
+    private AppDatabase db;
 
+    // --- FIX 1: Add a local executor ---
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        
-        // Initialize UI elements outside the inset listener
+
         LoginUserName = findViewById(R.id.LoginUserName);
         editLoginPassword = findViewById(R.id.editLoginPassword);
         btnLogin = findViewById(R.id.btnLogin);
         txtNewUser = findViewById(R.id.txtNewUser);
         spinnerUserType = findViewById(R.id.spinnerUserType);
-        
+
+        // This is correct
+        db = AppDatabase.getDatabase(getApplicationContext()); // Changed to getInstance
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -48,56 +58,61 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         spinnerUserType.setSelection(0);
-
-        spinnerUserType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    // First item is just a hint, do nothing
-                } else {
-                    String selectedUser = parent.getItemAtPosition(position).toString();
-                    // Use selectedUser: "Admin", "User", "Gym Admin"
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
-            }
-        });
-
+        // Removed the unused setOnItemSelectedListener
     }
+
     public void onClickedSignIn(View view) {
         String username = LoginUserName.getText().toString().trim();
         String password = editLoginPassword.getText().toString().trim();
+        if (spinnerUserType.getSelectedItemPosition() == 0) {
+            Toast.makeText(getApplicationContext(), "Please select a user type", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String selectedRole = spinnerUserType.getSelectedItem().toString();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            AppDatabase db = AppDatabase.getDatabase(this);
-            Integer userID = db.userDao().login(username, password);
-
+        // --- FIX 2: Use the local 'executor' ---
+        executor.execute(() -> {
+            // This code is now correct
+            User user = db.userDao().login(username, password);
 
             runOnUiThread(() -> {
-                if (userID != null) {
+                if (user == null) {
+                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                }
+                else if(!user.userRole.equals(selectedRole)) {
+                    Toast.makeText(getApplicationContext(), "Permission denied for this role", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-
 
                     SharedPreferences prefs = getSharedPreferences("UserSession", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putInt("userID", userID);
+                    editor.putInt("userID", user.userID);
+                    editor.putString("userRole", user.userRole);
                     editor.putBoolean("isLoggedIn", true);
                     editor.apply();
 
+                    Intent intent;
+                    switch(user.userRole){
+                        case "Admin":
+                            intent = new Intent(LoginActivity.this, SystemAdminHomePage.class);
+                            break;
 
-                    Intent intent = new Intent(LoginActivity.this, DIYActivity.class);
+                        case "Gym Admin":
+                            intent = new Intent(LoginActivity.this, GymAdminHomePage.class);
+                            break;
+                        case "User":
+                        default:
+                            intent = new Intent(LoginActivity.this, UserHomePage.class);
+                            break;
+                    }
                     startActivity(intent);
                     finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
             });
         });
@@ -107,3 +122,4 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 }
+

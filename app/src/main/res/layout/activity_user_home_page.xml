@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/user_homepage">
-
-
-    <!-- Bottom Menu -->
+    android:id="@+id/main"
+    android:background="@drawable/final_home_page">
 
     <ImageButton
         android:id="@+id/menuButton"
@@ -36,45 +34,32 @@
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
-        android:id="@+id/bottomMenu"
+    android:id="@+id/bottomMenu"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <Button
+        android:id="@+id/btnGoQuestions"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/grey"
+        android:text="@string/questions"
+        android:layout_marginEnd="4dp" />
+    <Button
+    android:id="@+id/btnGymList"
+    android:layout_width="0dp"
+    android:layout_height="51dp"
+    android:layout_weight="1"
+    android:backgroundTint="@color/grey"
+    android:text="@string/gym_list"
+    android:layout_marginStart="4dp" /> </LinearLayout>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/grey"
-            android:text="@string/questions" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/grey"
-            android:text="@string/notifications"
-            />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/grey"
-            android:text="@string/gym_list" />
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

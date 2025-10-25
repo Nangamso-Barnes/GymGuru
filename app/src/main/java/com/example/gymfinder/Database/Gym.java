@@ -18,6 +18,8 @@ public class Gym {
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     public byte[] gymPicture; // Added the picture field as a byte array
     public double price;
+    public double latitude;
+    public double longitude;
 
     public Gym() { } // Empty constructor for Room
 

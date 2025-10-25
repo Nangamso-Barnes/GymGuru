@@ -22,5 +22,7 @@ public interface QuestionDao {
     List<Question> getAllQuestions();
     @Delete
     void deleteQuestion(Question question);
+    @Query("SELECT queID FROM Question WHERE question_tag = :tag LIMIT 1")
+    int getQuestionIdByTag(String tag);
 
 }

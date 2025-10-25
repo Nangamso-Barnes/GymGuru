@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gymfinder.Database.AppDatabase;
 import com.example.gymfinder.Database.ReportResult;
 import com.example.gymfinder.R;
-import com.example.gymfinder.ReportAdapter;
+import com.example.gymfinder.HelperMethods.ReportAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

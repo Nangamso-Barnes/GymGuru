@@ -45,12 +45,15 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     TextView txtAccountExits;
     RadioButton regFemale, regMale;
+    EditText regAdminCode;
+    TextView regTitle;
     private ImageView ivTogglePassword, ivToggleConfirmPassword, RegBack;
 
     private boolean isPasswordVisible = false;
     private boolean isConfirmPasswordVisible = false;
     private final Executor executor = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private int titleTapCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +81,28 @@ public class RegisterActivity extends AppCompatActivity {
             ivToggleConfirmPassword = findViewById(R.id.ivToggleConfirmPassword);
             RegBack = findViewById(R.id.RegBackArrow);
             txtAccountExits = findViewById(R.id.textAlreadyExists);
+            regAdminCode=findViewById(R.id.RegAdminCode);
+            regTitle=findViewById(R.id.regTitle);
+
+            regTitle.setOnClickListener(view -> {
+                titleTapCount++;
+                if (titleTapCount >= 5) {
+                    // After 5 taps, show the secret field
+                    regAdminCode.setVisibility(View.VISIBLE);
+                    Toast.makeText(this, "Admin Mode Activated", Toast.LENGTH_SHORT).show();
+                }
+            });
             return insets;
         });
+    }
+    private String getRoleFromCode(String code) {
+        if (code.equals("SUPER_ADMIN_2025")) { // This is your secret Admin code
+            return "Admin";
+        } else if (code.equals("GYM_OWNER_123")) { // This is your secret Gym Admin code
+            return "Gym Admin";
+        } else {
+            return "User"; // Default for everyone else
+        }
     }
 
     public void onClickedCreate(View view) {
@@ -125,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 final String finalGender = regGender;
+        String adminCode = regAdminCode.getText().toString().trim();
 executor.execute(() ->{
 
     AppDatabase db = AppDatabase.getDatabase(this);
@@ -139,6 +163,7 @@ executor.execute(() ->{
     user.password=password;
     user.gender=finalGender;
 
+    user.userRole=getRoleFromCode(adminCode);
     long userID = db.userDao().register(user);
 
     handler.post(() -> {

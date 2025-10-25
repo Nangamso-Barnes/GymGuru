@@ -12,13 +12,14 @@ public interface UserDao {
     @Insert
     long register(User user);
 
-    @Query("SELECT userID FROM User WHERE UserName = :username AND password = :password LIMIT 1")
-    Integer login(String username, String password);
+    @Query("SELECT * FROM User WHERE UserName = :username AND password = :password LIMIT 1")
+    User login(String username, String password);
 
     @Query("SELECT * FROM User WHERE userID = :userId LIMIT 1")
     User getUserById(int userId);
 
     @Update
     int updateUser(User user);
-
+    @Query("UPDATE User SET latitude = :lat, longitude = :lon WHERE userID = :userId")
+    void updateUserCoordinates(int userId, double lat, double lon);
 }

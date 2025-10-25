@@ -1,6 +1,8 @@
 package com.example.gymfinder.Activity;
 
 import android.os.Bundle;
+import android.os.Looper; // Import
+import android.os.Handler; // Import
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +26,10 @@ import com.example.gymfinder.Database.Question;
 import com.example.gymfinder.Database.UserResponse;
 import com.example.gymfinder.R;
 
+import java.util.ArrayList; // Import
 import java.util.List;
+import java.util.concurrent.ExecutorService; // Import
+import java.util.concurrent.Executors; // Import
 
 public class CompleteQuestionaireActivity extends AppCompatActivity {
     // UI Elements
@@ -40,11 +45,14 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     private MiscDao miscDao;
     private GymDao gymDao;
 
-    // Store the ID of the logged-in user
-    private int currentUserId;
-    private static final String USER_ID_EXTRA = "user_id";
+    // Database Executor
+    private final ExecutorService dbExecutor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    // Store Question IDs using their tags for robust saving
+    private int currentUserId;
+    // --- FIX 1: This MUST match the key from UserHomePage.java ---
+    private static final String USER_ID_EXTRA = "userID";
+
     private int budgetQuestionId = -1;
     private int trainerQuestionId = -1;
     private int classesQuestionId = -1;
@@ -56,32 +64,25 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_questionaire);
 
-        // Initialize DAOs from your Room Database
+
         AppDatabase db = AppDatabase.getDatabase(this);
         questionDao = db.questionDao();
         userResponseDao = db.userResponseDao();
         miscDao = db.miscDao();
         gymDao = db.gymDao();
 
-        // Get user ID from the intent
         currentUserId = getIntent().getIntExtra(USER_ID_EXTRA, -1);
         if (currentUserId == -1) {
             Toast.makeText(this, "Error: User not logged in.", Toast.LENGTH_LONG).show();
-            finish(); // Can't proceed without a valid user
+            finish();
             return;
         }
 
-        // Find all UI elements
         initializeViews();
-
-        // Load questions and spinner data from the database
         populateQuestionsFromDb();
         loadSpinners();
-
-        // Set up listeners for UI interactions
         setupListeners();
 
-        // Handle window insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -90,6 +91,7 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+
         budget = findViewById(R.id.createBudget);
         trainerSpinner = findViewById(R.id.trainerTypeSpinner);
         classSpinner = findViewById(R.id.classesTypeSpinner);
@@ -106,6 +108,7 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
+
         rbntrainers.setOnCheckedChangeListener((group, checkedId) -> {
             trainerSpinner.setVisibility(checkedId == R.id.trainerYes ? View.VISIBLE : View.GONE);
         });
@@ -116,16 +119,17 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     }
 
     private void populateQuestionsFromDb() {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
+        dbExecutor.execute(() -> {
+
             final List<Question> questions = questionDao.getAllQuestions();
-            runOnUiThread(() -> {
+            mainHandler.post(() -> {
                 if (questions.isEmpty()) {
                     Toast.makeText(this, "No questionnaire questions found.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Loop through questions and map them to UI elements using the stable TAG
                 for (Question q : questions) {
-                    if (q.questionTag == null) continue; // Skip questions that don't have a tag
+                    if (q.questionTag == null) continue;
+
 
                     switch (q.questionTag) {
                         case "BUDGET":
@@ -155,15 +159,14 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     }
 
     private void loadSpinners() {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            // FIX: Call the method names exactly as they are in your MiscDao.java
+        dbExecutor.execute(() -> {
+
             final List<String> trainers = miscDao.getAllTrainers();
             final List<String> classes = miscDao.getAllClasses();
             final List<String> equipment = miscDao.getAllEquipment();
             final List<String> timeSlots = gymDao.getDistinctTimeSlots();
 
-            runOnUiThread(() -> {
-                // This UI code is correct and does not need to change
+            mainHandler.post(() -> {
                 ArrayAdapter<String> trainerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, trainers);
                 trainerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 trainerSpinner.setAdapter(trainerAdapter);
@@ -184,38 +187,35 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
     }
 
     public void onClickedSave(View view) {
-        // Collect all answers from the UI
-        String budgetAnswer = budget.getText().toString();
-        String trainerAnswer = getTrainerAnswer();
-        String classesAnswer = getClassesAnswer();
-        String timeSlotAnswer = (timeSlotSpinner.getSelectedItem() != null) ? timeSlotSpinner.getSelectedItem().toString() : "";
-        String equipmentAnswer = (equipmentSpinner.getSelectedItem() != null) ? equipmentSpinner.getSelectedItem().toString() : "";
 
-        // Save each response to the database
-        saveResponse(budgetQuestionId, budgetAnswer);
-        saveResponse(trainerQuestionId, trainerAnswer);
-        saveResponse(classesQuestionId, classesAnswer);
-        saveResponse(timeSlotQuestionId, timeSlotAnswer);
-        saveResponse(equipmentQuestionId, equipmentAnswer);
+        List<UserResponse> responses = new ArrayList<>();
+
+        addResponseToList(responses, budgetQuestionId, budget.getText().toString());
+        addResponseToList(responses, trainerQuestionId, getTrainerAnswer());
+        addResponseToList(responses, classesQuestionId, getClassesAnswer());
+        addResponseToList(responses, timeSlotQuestionId, (timeSlotSpinner.getSelectedItem() != null) ? timeSlotSpinner.getSelectedItem().toString() : "");
+        addResponseToList(responses, equipmentQuestionId, (equipmentSpinner.getSelectedItem() != null) ? equipmentSpinner.getSelectedItem().toString() : "");
+
+        dbExecutor.execute(() -> {
+            // Use the new transaction to clear old answers and insert new ones
+            userResponseDao.clearAndInsertAllResponses(currentUserId, responses);
+        });
 
         Toast.makeText(this, "Questionnaire saved!", Toast.LENGTH_SHORT).show();
-        finish(); // Close the activity after saving
+        finish();
     }
 
 
-    private void saveResponse(int questionId, String answerText) {
-        // Only save if the question ID is valid and the answer is not empty
+    private void addResponseToList(List<UserResponse> list, int questionId, String answerText) {
         if (questionId != -1 && answerText != null && !answerText.isEmpty()) {
             UserResponse response = new UserResponse();
             response.userID = currentUserId;
             response.queID = questionId;
             response.answer = answerText;
-
-            AppDatabase.databaseWriteExecutor.execute(() -> {
-                userResponseDao.saveUserResponse(response);
-            });
+            list.add(response);
         }
     }
+
 
     private String getTrainerAnswer() {
         int checkedId = rbntrainers.getCheckedRadioButtonId();
@@ -226,6 +226,7 @@ public class CompleteQuestionaireActivity extends AppCompatActivity {
         }
         return "";
     }
+
 
     private String getClassesAnswer() {
         int checkedId = rbnclasses.getCheckedRadioButtonId();

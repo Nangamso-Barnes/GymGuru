@@ -43,7 +43,7 @@
         android:layout_width="352dp"
         android:layout_height="72dp"
         android:layout_marginTop="20dp"
-        android:background="@android:drawable/btn_dropdown"
+        android:background="@drawable/spinner_background_white"
         android:entries="@array/user_types"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +83,7 @@
         app:layout_constraintTop_toBottomOf="@id/LoginUserName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <Button
         android:id="@+id/btnLogin"

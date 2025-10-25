@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymFinder">
         <activity
+            android:name=".Activity.MatchListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ViewGymReport"
             android:exported="false"
             android:theme="@style/Theme.GymFinder" />
@@ -41,10 +44,7 @@
         <activity
             android:name=".Activity.ListOfActivityFromTheDatabase"
             android:exported="false" />
-        <activity
-            android:name=".Activity.ListOfGymsFromDatabase"
-            android:exported="false"
-            android:theme="@style/Theme.GymFinder" />
+
         <activity
             android:name=".Activity.AddGym"
             android:exported="false"
@@ -67,7 +67,6 @@
         <activity
             android:name=".Activity.EditProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activity.DeleteQuestionListActivity"
             android:exported="false" />
@@ -75,7 +74,7 @@
             android:name=".Activity.EditQuestionListActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.GymListActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.QuestionaireActivity"
@@ -99,7 +98,7 @@
             android:name=".Activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.GymListActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

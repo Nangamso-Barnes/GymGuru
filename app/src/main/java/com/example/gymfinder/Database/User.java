@@ -24,7 +24,13 @@ public class User {
     public String gender;
     public String streetName;
     public String streetNumber;
+    public String userRole;
+    public double latitude;
+    public double longitude;
 
     @ColumnInfo(index = true)
     public Integer gymCode;
+    public User() {
+        // Empty constructor for Room
+    }
 }

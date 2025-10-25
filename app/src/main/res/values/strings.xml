@@ -31,7 +31,11 @@
 
     <string name="home_tagline">Help us help you find the perfect gym!!</string>
     <string name="button_go"><![CDATA[>>>>GO>>>>]]></string>
+    <string name="button_view_profile">VIEW PROFILE</string>
+    <string name="potential_gym_list">Potential Gym List</string>
 
+<string name="hint_admin_code">Admin Code</string>
+    <string name="cd_admin_code">Admin Code Input</string>
 
     <string name="edit_profile_title">Edit Profile</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
@@ -130,9 +134,6 @@
     <string name="btn_ok">OK</string>
     <!-- GymReport -->
     <string name="txt_gym_report">Gym Report</string>
-
-
-
 
 
 </resources>

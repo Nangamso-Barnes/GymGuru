@@ -11,5 +11,12 @@ public class Question {
     public String question;
     @ColumnInfo(name = "question_tag")
     public String questionTag;
+    public Question() {}
+
+    // This new constructor will be used for seeding
+    public Question(String question, String questionTag) {
+        this.question = question;
+        this.questionTag = questionTag;
+    }
 }
 
